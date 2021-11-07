@@ -14,5 +14,4 @@ public interface ProducerServiceInterface {
 
    public void deleteProducer(int id);
 
-   public int getProducerid(String producerName);
 }

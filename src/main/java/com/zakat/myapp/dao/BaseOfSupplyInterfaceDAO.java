@@ -12,4 +12,8 @@ public interface BaseOfSupplyInterfaceDAO {
     public BaseOfSupply getBase(int id);
 
     public void deleteBase(int id);
+
+   public int getBaseIdByName(String baseName);
+
+   public String getBaseNameById(int baseId);
 }

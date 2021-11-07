@@ -10,9 +10,10 @@
 <a href="/allsupply">Show all supplys</a>
 <br>
 <br>
-<form:form action="saveSupplyWithAttribute" modelAttribute="supply">
+<form:form action="saveTempSupply" modelAttribute="tempSupply">
     <form:hidden path="id"/>
     Material: <form:input path="material"/>
+    <form:errors path="material"/>
     <br>
     Quantity: <form:input path="quantity"/>
     <br>
@@ -28,16 +29,18 @@
 
 </form:select>
     <br>
-    <div>Use date pattern YYYY-DD-MM</div>
+    <div>Use date pattern YYYY-MM-DD</div>
     Date: <form:input path="date"/>
     <form:errors path="date"/>
     <br>
     Commentary: <form:input path="commentary"/>
     <br>
 
-    Producer name: <form:input path="producer"/>
+    Producer name: <form:input path="producerString"/>
+    <form:errors path="producerString"/>
     <br>
-    Base of Supply: <form:input path="baseOfSupply"/>
+    Base of Supply: <form:input path="baseString"/>
+    <form:errors path="baseString"/>
     <br>
     <input type="submit" value="Add!">
 

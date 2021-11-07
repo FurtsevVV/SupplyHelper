@@ -42,10 +42,5 @@ public class ProducerService implements ProducerServiceInterface {
         producerDAO.deleteProducer(id);
     }
 
-    @Override
-    public int getProducerid(String producerName) {
-        producerDAO.getMap(producerName);
-        Map<Integer, String> mapWithResults = new HashMap<>();
-        return 0;
-    }
+
 }

@@ -11,4 +11,9 @@ public interface SupplyInterfaceDAO {
    public void saveSupply(Supply supply);
 
 
+   public Supply getSupply(int id);
+
+   public void deleteSupply(int id);
+
+   public List<Supply> getSupplyByStatus(String statusValue);
 }

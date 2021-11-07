@@ -15,5 +15,9 @@ public interface ProducerInterfaceDAO {
 
    public void deleteProducer(int id);
 
-  public Map getMap(String producerName);
+
+
+   public int getProducerIdByName(String producerName);
+
+   public String getProducerNameById(int producerId);
 }

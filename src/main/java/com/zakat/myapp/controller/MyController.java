@@ -1,9 +1,7 @@
 package com.zakat.myapp.controller;
 
 import com.zakat.myapp.dao.BaseOfSupplyInterfaceDAO;
-import com.zakat.myapp.entity.BaseOfSupply;
-import com.zakat.myapp.entity.Producer;
-import com.zakat.myapp.entity.Supply;
+import com.zakat.myapp.entity.*;
 import com.zakat.myapp.service.BaseOfSupplyServiceInterface;
 import com.zakat.myapp.service.ProducerServiceInterface;
 import com.zakat.myapp.service.SupplyServiceInterface;
@@ -13,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -47,29 +47,64 @@ public class MyController {
 
     @RequestMapping("/newsupply")
     public String addNewSupply(Model model) {
-        Supply supply = new Supply();
+        TempSupply tempSupply = new TempSupply();
 
-        model.addAttribute("supply", supply);
+        model.addAttribute("tempSupply", tempSupply);
         return "new-supply";
     }
 
-
-
-
-    @RequestMapping("/saveSupply")
-    public String saveSupply(@Valid @ModelAttribute("supply") Supply supply, BindingResult bindingResult) {
+    @RequestMapping("/saveTempSupply")
+    public String saveTempSupply(@Valid @ModelAttribute("tempSupply") TempSupply tempSupply, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "new-supply";
         }
-        supplyService.saveSupply(supply);
+
+        supplyService.saveSupply(tempSupply);
         return "redirect:/allsupply";
     }
 
-
-    public void getProducerId(String producerName){
-       int producerId =  producerService.getProducerid(producerName);
+@RequestMapping("/updateSupply")
+    public String updateSupply(@RequestParam("supplyId") int id, Model model){
+        TempSupply tempSupply = supplyService.getTempSupply(id);
+    model.addAttribute("tempSupply", tempSupply);
+    return "new-supply";
     }
+
+
+    @RequestMapping("/deleteSupply")
+    public String deleteSupply(@RequestParam("supplyId") int id){
+        supplyService.deleteSupply(id);
+        return "redirect:/allsupply";
+
+    }
+
+@RequestMapping(value = "/allSupplyByStatus")
+public String allSupplyByStatus(@ModelAttribute("sortedMethodModel") SortedMethodModel sortedMethodModel, Model model)  {
+        String statusValue =sortedMethodModel.getSortedStatus();
+List<Supply> supplyListByStatus = supplyService.getSupplyByStatus(statusValue);
+return "all-supply-by-status";
+}
+
+
+
+
+
+
+//    @RequestMapping(value = "/addman", method = RequestMethod.GET)
+//    protected ModelAndView addMan(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+//        ModelAndView result = new ModelAndView("index/addMan");
+//        result.addObject("mansForm", new MansForm());
+//        return result;
+//    }
+//    @RequestMapping(value = "/addman", method = RequestMethod.POST)
+//    protected String addManPost(MansForm mansForm) throws UnsupportedEncodingException {
+//        String manName = man.setName(mansForm.getName());
+//        // Здесь выполняем какие-то действия (например, сохранение в БД)
+//        return "redirect:/addman";
+//    }
+
+
 
     //==============Base Of Supply=============
 

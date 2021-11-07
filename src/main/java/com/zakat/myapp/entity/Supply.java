@@ -4,6 +4,8 @@ package com.zakat.myapp.entity;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.Map;
 
@@ -15,6 +17,7 @@ public class Supply {
     @Column(name= "id")
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank(message = "Field must be filled")
     @Column(name = "material")
     private String material;
     @Column(name="quantity")
@@ -25,7 +28,7 @@ public class Supply {
     private double sum;
     @Column(name = "statussup")
     private String status;
-    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Use pattern YYYY-DD-MM")
+    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Use pattern YYYY-MM-DD")
     @Column(name = "date_of_supply")
     private String date;
     @Column(name = "commentary")
