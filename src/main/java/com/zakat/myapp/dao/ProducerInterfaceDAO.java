@@ -9,15 +9,14 @@ public interface ProducerInterfaceDAO {
 
     public List<Producer> getAllProducer();
 
-  public   void saveProducer(Producer producer);
+    public void saveProducer(Producer producer);
 
-   public Producer getProducer(int id);
+    public Producer getProducer(int id);
 
-   public void deleteProducer(int id);
+    public void deleteProducer(int id);
 
 
+    public int getProducerIdByName(String producerName);
 
-   public int getProducerIdByName(String producerName);
-
-   public String getProducerNameById(int producerId);
+    public String getProducerNameById(int producerId);
 }

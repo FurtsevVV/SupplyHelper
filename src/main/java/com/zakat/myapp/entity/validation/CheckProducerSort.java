@@ -10,9 +10,10 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = CheckProducerValidator.class)
-public @interface CheckProducer {
-    public String value() default "RIA1";
+@Constraint(validatedBy = CheckProducerSortValidator.class)
+public @interface CheckProducerSort {
+
+    public String value() default "";
 
     public String message() default "No this producer in database";
 

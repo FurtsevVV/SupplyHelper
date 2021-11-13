@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class CheckProducerValidator implements ConstraintValidator<CheckProducer, String> {
+public class CheckProducerSortValidator implements ConstraintValidator<CheckProducerSort, String> {
 
     @Autowired
     private ProducerServiceInterface producerService;
@@ -16,13 +16,15 @@ public class CheckProducerValidator implements ConstraintValidator<CheckProducer
     private String gettingProducerName;
 
     @Override
-    public void initialize(CheckProducer checkProducer) {
+    public void initialize(CheckProducerSort checkProducer) {
         gettingProducerName = checkProducer.value();
     }
 
     @Override
     public boolean isValid(String enteredProducerName, ConstraintValidatorContext constraintValidatorContext) {
-
+        if (enteredProducerName.equals("")) {
+            return true;
+        }
         List<Producer> listProducer = producerService.getAllProducer();
         for (Producer producer : listProducer) {
             if (enteredProducerName.equals(producer.getName()))

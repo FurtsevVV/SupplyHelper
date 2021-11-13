@@ -13,9 +13,11 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = CheckBaseOfSupplyValidator.class)
 public @interface CheckBaseOfSupply {
     public String value() default "KRU3";
+
     public String message() default "No this Base of Supply in database";
 
     public Class<?>[] groups() default {};
+
     public Class<? extends Payload>[] payload() default {};
 
 }

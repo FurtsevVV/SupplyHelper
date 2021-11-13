@@ -3,16 +3,23 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h2>Supply Helper Welcome Page</h2>
-<br>
-
-<div>Links</div>
-<a href="/allbase">Show base of supply</a>
-<br>
-<a href="/allProducer">Show list of Producer</a>
+<body bgcolor="#CCCCCC">
+<h2>Supply Helper by Valentin Furtsev</h2>
 
 <br>
-<a href="/allsupply">Show list Supplys</a>
+
+<h3>Links</h3>
+<br>
+<h3><a href="/allsupply">Show list of Supplys</a></h3>
+
+<h3><a href="/allbase">Show Base of supply</a></h3>
+
+<h3><a href="/allProducer">Show list of Producer</a></h3>
+
+<br>
+<br>
+<br>
+<h3><a href="/about">About</a></h3>
 
 
 </body>

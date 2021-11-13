@@ -3,18 +3,20 @@
 <!DOCTYPE html>
 <html>
 <body>
+<body bgcolor="#CCCCCC">
 <h2>Base of Supply</h2>
 
 <br>
 <br>
-<a href="/">Welcome page</a>
+<h2><a href="/">Welcome page</a></h2>
+
 <br>
 <br>
 <br>
 <input type="button" value="Add Base Of Supply" onclick="window.location.href='newbase'"/>
 <br>
 <br>
-<table>
+<table border="1" width="1000">
     <tr>
         <th>Name of object: </th>
         <th>Customer:       </th>

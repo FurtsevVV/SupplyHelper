@@ -1,12 +1,19 @@
 package com.zakat.myapp.entity;
 
+
+import com.zakat.myapp.entity.validation.CheckBaseOfSupplySort;
+
+import com.zakat.myapp.entity.validation.CheckProducerSort;
+
 import javax.persistence.Entity;
 
 public class SortedMethodModel {
 
     private String sortedStatus;
     private double sortedSum;
+    @CheckProducerSort
     private String sortedProducer;
+    @CheckBaseOfSupplySort
     private String sortedBase;
 
     public SortedMethodModel() {

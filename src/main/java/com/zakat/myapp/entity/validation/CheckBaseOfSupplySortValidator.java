@@ -8,20 +8,21 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class CheckBaseOfSupplyValidator implements ConstraintValidator<CheckBaseOfSupply, String> {
-
+public class CheckBaseOfSupplySortValidator implements ConstraintValidator<CheckBaseOfSupplySort, String> {
     @Autowired
     BaseOfSupplyServiceInterface baseService;
 
     private String gettingBaseOfSupplyName;
 
     @Override
-    public void initialize(CheckBaseOfSupply checkBase) {
+    public void initialize(CheckBaseOfSupplySort checkBase) {
         gettingBaseOfSupplyName = checkBase.value();
     }
 
     @Override
     public boolean isValid(String enteredBaseName, ConstraintValidatorContext constraintValidatorContext) {
+        if (enteredBaseName.equals(""))
+            return true;
         List<BaseOfSupply> baseList = baseService.getAllBaseOfSupply();
         for (BaseOfSupply base : baseList) {
             if (enteredBaseName.equals(base.getNameOfObject()))

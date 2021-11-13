@@ -3,29 +3,49 @@
 <!DOCTYPE html>
 <html>
 <body>
+<body bgcolor="#CCCCCC">
 <h2>All Supplys</h2>
-
-<br>
-<br>
-<a href="/">Welcome page</a>
-<br>
+<h3><a href="/">Welcome page</a></h3>
 <br>
 <h2>Sorting</h2>
+<form:form method="get" modelAttribute="sortedMethodModel" action="/sortingAllSupply">
+<table border="1" width="400">
+    <tr>
+        <td>Sort by Producer:</td>
+        <td><form:input path="sortedProducer" /></td>
+        <form:errors path="sortedProducer"/>
 
-<form:form action="/allSupplyByStatus" modelAttribute="sortedMethodModel" >
-Where status of delivery is: <form:select path="sortedStatus">
-    <form:option value="Order approval" label="Order approval"/>
+    </tr>
+    <tr>
+        <td>Sort by Base of Supply:</td>
+        <td><form:input path="sortedBase" /></td>
+        <form:errors path="sortedBase"/>
+
+    </tr>
+    <tr>
+    <td>Sort by Status:</td> <td> <form:select path="sortedStatus">
+        <form:option value="No value" label="No value"/>
+        <form:option value="Order approval" label="Order approval"/>
     <form:option value="Make a contract" label="Make a contract"/>
     <form:option value="On the way" label="On the way"/>
     <form:option value="Delivery is done" label="Delivery is done"/>
-
 </form:select>
-<input type="button" value="Sort by status" />
+    </td>
+    </tr>
+    <tr>
+        <td>Sort by Sum, More Than:</td>
+        <td><form:input path="sortedSum" /></td>
+         </tr>
+    <td colspan="3"><input type="submit" value="Submit" /></td>
+
+</table>
 </form:form>
 <br>
+<br>
+<h3>Add new Supply</h3>
 <input type="button" value="Add Supply" onclick="window.location.href='newsupply'"/>
 <br>
-<table>
+<table border="1" width="1600">
     <tr>
         <th>Material: </th>
         <th>Qty:   </th>

@@ -29,7 +29,7 @@ public class ProducerDAO implements ProducerInterfaceDAO {
     @Override
     public void saveProducer(Producer producer) {
         Session session = sessionFactory.getCurrentSession();
-session.saveOrUpdate(producer);
+        session.saveOrUpdate(producer);
     }
 
     @Override
@@ -41,24 +41,24 @@ session.saveOrUpdate(producer);
     @Override
     public void deleteProducer(int id) {
         Session session = sessionFactory.getCurrentSession();
-Producer producer = session.get(Producer.class, id);
-session.delete(producer);
+        Producer producer = session.get(Producer.class, id);
+        session.delete(producer);
     }
-
 
 
     @Override
     public int getProducerIdByName(String producerName) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select P.id from Producer P where P.name = :producerName");
-query.setParameter("producerName", producerName);
-        return (int) query.getSingleResult();  }
+        query.setParameter("producerName", producerName);
+        return (int) query.getSingleResult();
+    }
 
     @Override
     public String getProducerNameById(int producerId) {
         Session session = sessionFactory.getCurrentSession();
-Query query = session.createQuery("select P.name from Producer P where P.id = :producerId");
-query.setParameter("producerId", producerId);
+        Query query = session.createQuery("select P.name from Producer P where P.id = :producerId");
+        query.setParameter("producerId", producerId);
         return (String) query.getSingleResult();
     }
 }

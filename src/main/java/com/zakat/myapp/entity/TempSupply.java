@@ -20,11 +20,9 @@ public class TempSupply {
     private String date;
     private String commentary;
     @CheckProducer
-private String producerString;
-@CheckBaseOfSupply
-private String baseString;
-
-
+    private String producerString;
+    @CheckBaseOfSupply
+    private String baseString;
 
 
     public TempSupply() {

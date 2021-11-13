@@ -35,11 +35,17 @@ public class MyController {
         return "welcome-page";
     }
 
+    @RequestMapping("/about")
+    public String showAbout(Model model) {
+        return "about";
+    }
+
     //========+++======Supply==================
     @RequestMapping("/allsupply")
     public String showAllSupply(Model model) {
         List<Supply> supplyList = supplyService.getAllSupply();
 
+        model.addAttribute("sortedMethodModel", new SortedMethodModel());
         model.addAttribute("allSupply", supplyList);
 
         return "all-supply";
@@ -64,46 +70,34 @@ public class MyController {
         return "redirect:/allsupply";
     }
 
-@RequestMapping("/updateSupply")
-    public String updateSupply(@RequestParam("supplyId") int id, Model model){
+    @RequestMapping("/updateSupply")
+    public String updateSupply(@RequestParam("supplyId") int id, Model model) {
         TempSupply tempSupply = supplyService.getTempSupply(id);
-    model.addAttribute("tempSupply", tempSupply);
-    return "new-supply";
+        model.addAttribute("tempSupply", tempSupply);
+        return "new-supply";
     }
 
 
     @RequestMapping("/deleteSupply")
-    public String deleteSupply(@RequestParam("supplyId") int id){
+    public String deleteSupply(@RequestParam("supplyId") int id) {
         supplyService.deleteSupply(id);
         return "redirect:/allsupply";
 
     }
 
-@RequestMapping(value = "/allSupplyByStatus")
-public String allSupplyByStatus(@ModelAttribute("sortedMethodModel") SortedMethodModel sortedMethodModel, Model model)  {
-        String statusValue =sortedMethodModel.getSortedStatus();
-List<Supply> supplyListByStatus = supplyService.getSupplyByStatus(statusValue);
-return "all-supply-by-status";
-}
-
-
-
-
-
-
-//    @RequestMapping(value = "/addman", method = RequestMethod.GET)
-//    protected ModelAndView addMan(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
-//        ModelAndView result = new ModelAndView("index/addMan");
-//        result.addObject("mansForm", new MansForm());
-//        return result;
-//    }
-//    @RequestMapping(value = "/addman", method = RequestMethod.POST)
-//    protected String addManPost(MansForm mansForm) throws UnsupportedEncodingException {
-//        String manName = man.setName(mansForm.getName());
-//        // Здесь выполняем какие-то действия (например, сохранение в БД)
-//        return "redirect:/addman";
-//    }
-
+    @RequestMapping("/sortingAllSupply")
+    public String sortingAllSupply(@Valid @ModelAttribute("sortedMethodModel") SortedMethodModel sortedMethodModel, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "all-supply";
+        }
+        String producer = sortedMethodModel.getSortedProducer();
+        String base = sortedMethodModel.getSortedBase();
+        String status = sortedMethodModel.getSortedStatus();
+        double sortedSum = sortedMethodModel.getSortedSum();
+        List<Supply> sortedList = supplyService.getSortedSupply(producer, base, status, sortedSum);
+        model.addAttribute("sortedSupply", sortedList);
+        return "sort-all-supply";
+    }
 
 
     //==============Base Of Supply=============

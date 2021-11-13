@@ -1,6 +1,5 @@
 package com.zakat.myapp.entity.validation;
 
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
@@ -10,11 +9,12 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = CheckProducerValidator.class)
-public @interface CheckProducer {
-    public String value() default "RIA1";
+@Constraint(validatedBy = CheckBaseOfSupplySortValidator.class)
+public @interface CheckBaseOfSupplySort {
 
-    public String message() default "No this producer in database";
+    public String value() default "";
+
+    public String message() default "No this Base of Supply in database";
 
     public Class<?>[] groups() default {};
 

@@ -8,10 +8,10 @@ public interface ProducerServiceInterface {
 
     public List<Producer> getAllProducer();
 
-   public void saveProducer(Producer producer);
+    public void saveProducer(Producer producer);
 
-   public Producer getProducer(int id);
+    public Producer getProducer(int id);
 
-   public void deleteProducer(int id);
+    public void deleteProducer(int id);
 
 }

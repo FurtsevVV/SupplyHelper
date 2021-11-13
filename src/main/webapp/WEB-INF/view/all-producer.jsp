@@ -3,18 +3,19 @@
 <!DOCTYPE html>
 <html>
 <body>
+<body bgcolor="#CCCCCC">
 <h2>Producers</h2>
 
 <br>
 <br>
-<a href="/">Welcome page</a>
+<h2><a href="/">Welcome page</a></h2>
 <br>
 <br>
 <br>
 <br>
 <input type="button" value="Add Producer" onclick="window.location.href='newProducer'"/>
 <br>
-<table>
+<table border="1" width="1000">
     <tr>
         <th>Name of producer: </th>
         <th>Contact person:   </th>

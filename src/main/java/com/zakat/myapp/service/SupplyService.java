@@ -36,7 +36,7 @@ public class SupplyService implements SupplyServiceInterface {
     @Override
     @Transactional
     public void saveSupply(TempSupply tempSupply) {
-Supply newSupply = new Supply();
+        Supply newSupply = new Supply();
         String producerName = tempSupply.getProducerString();
         int producerId = producerDAO.getProducerIdByName(producerName);
         String baseName = tempSupply.getBaseString();
@@ -45,17 +45,17 @@ Supply newSupply = new Supply();
         Producer prod = producerDAO.getProducer(producerId);
 
         newSupply.setId(tempSupply.getId());
-newSupply.setMaterial(tempSupply.getMaterial());
-newSupply.setPrice(tempSupply.getPrice());
-newSupply.setQuantity(tempSupply.getQuantity());
-newSupply.setSum(tempSupply.getSum());
-newSupply.setDate(tempSupply.getDate());
-newSupply.setStatus(tempSupply.getStatus());
-newSupply.setCommentary(tempSupply.getCommentary());
-newSupply.setBaseOfSupply(bos);
-newSupply.setProducer(prod);
+        newSupply.setMaterial(tempSupply.getMaterial());
+        newSupply.setPrice(tempSupply.getPrice());
+        newSupply.setQuantity(tempSupply.getQuantity());
+        newSupply.setSum(tempSupply.getSum());
+        newSupply.setDate(tempSupply.getDate());
+        newSupply.setStatus(tempSupply.getStatus());
+        newSupply.setCommentary(tempSupply.getCommentary());
+        newSupply.setBaseOfSupply(bos);
+        newSupply.setProducer(prod);
 
-supplyDAO.saveSupply(newSupply);
+        supplyDAO.saveSupply(newSupply);
     }
 
     @Override
@@ -64,8 +64,8 @@ supplyDAO.saveSupply(newSupply);
         Supply supply = supplyDAO.getSupply(id);
         int producerId = supply.getProducer().getId();
         String producerName = producerDAO.getProducerNameById(producerId);
-int baseId = supply.getBaseOfSupply().getId();
-String baseName = baseOfSupplyDAO.getBaseNameById(baseId);
+        int baseId = supply.getBaseOfSupply().getId();
+        String baseName = baseOfSupplyDAO.getBaseNameById(baseId);
 
         TempSupply tempSupply = new TempSupply();
         tempSupply.setId(supply.getId());
@@ -91,7 +91,45 @@ String baseName = baseOfSupplyDAO.getBaseNameById(baseId);
     @Override
     @Transactional
     public List<Supply> getSupplyByStatus(String statusValue) {
-       return supplyDAO.getSupplyByStatus(statusValue);
+        return supplyDAO.getSupplyByStatus(statusValue);
+
+    }
+
+    @Override
+    @Transactional
+    public List<Supply> getSortedSupply(String producer, String base, String status, double sortedSum) {
+        if (status.equals("No value")) {
+            if (producer.equals("") && base.equals("")) {
+                return supplyDAO.sortedListOfSupplyBySum(sortedSum);
+            }
+            if (producer.equals("")) {
+                int baseId = baseOfSupplyDAO.getBaseIdByName(base);
+                return supplyDAO.sortedListOfSupplyBySumBase(sortedSum, baseId);
+            }
+            if (base.equals("")) {
+                int producerId = producerDAO.getProducerIdByName(producer);
+                return supplyDAO.sortedListOfSupplyBySumProducer(sortedSum, producerId);
+            }
+            int baseId = baseOfSupplyDAO.getBaseIdByName(base);
+            int producerId = producerDAO.getProducerIdByName(producer);
+            return supplyDAO.sortedListOfSupplyBySumBaseProducer(sortedSum, producerId, baseId);
+        }
+
+        if (producer.equals("") && base.equals("")) {
+            return supplyDAO.sortedListOfSupplyByStatusAndSum(status, sortedSum);
+        }
+        if (producer.equals("")) {
+            int baseId = baseOfSupplyDAO.getBaseIdByName(base);
+            return supplyDAO.sortedListOfSupplyByStatusSumBase(status, sortedSum, baseId);
+        }
+        if (base.equals("")) {
+            int producerId = producerDAO.getProducerIdByName(producer);
+            return supplyDAO.sortedListOfSupplyByStatusSumProducer(status, sortedSum, producerId);
+        }
+        int baseId = baseOfSupplyDAO.getBaseIdByName(base);
+        int producerId = producerDAO.getProducerIdByName(producer);
+        return supplyDAO.sortedListOfSupplyByStatusSumBaseProducer(status, sortedSum, producerId, baseId);
+
 
     }
 

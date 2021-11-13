@@ -10,17 +10,17 @@ import javax.validation.constraints.Pattern;
 import java.util.Map;
 
 @Entity
-@Table (name = "supply")
+@Table(name = "supply")
 public class Supply {
 
     @Id
-    @Column(name= "id")
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank(message = "Field must be filled")
     @Column(name = "material")
     private String material;
-    @Column(name="quantity")
+    @Column(name = "quantity")
     private double quantity;
     @Column(name = "price")
     private double price;
@@ -35,12 +35,11 @@ public class Supply {
     private String commentary;
 
 
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
+    private Producer producer;
+
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
-     private Producer producer;
-
-
-     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
     private BaseOfSupply baseOfSupply;
 
 
@@ -125,7 +124,7 @@ public class Supply {
         return producer;
     }
 
-        public void setProducer(Producer producer) {
+    public void setProducer(Producer producer) {
         this.producer = producer;
     }
 

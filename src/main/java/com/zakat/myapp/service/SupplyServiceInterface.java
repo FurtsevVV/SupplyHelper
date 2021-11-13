@@ -9,12 +9,14 @@ public interface SupplyServiceInterface {
 
     public List<Supply> getAllSupply();
 
-   public void saveSupply(TempSupply tempSupply);
+    public void saveSupply(TempSupply tempSupply);
 
 
-   public TempSupply getTempSupply(int id);
+    public TempSupply getTempSupply(int id);
 
-   public void deleteSupply(int id);
+    public void deleteSupply(int id);
 
-  public   List<Supply> getSupplyByStatus(String statusValue);
+    public List<Supply> getSupplyByStatus(String statusValue);
+
+    public List<Supply> getSortedSupply(String producer, String base, String status, double sortedSum);
 }

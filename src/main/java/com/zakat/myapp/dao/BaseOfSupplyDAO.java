@@ -52,13 +52,14 @@ public class BaseOfSupplyDAO implements BaseOfSupplyInterfaceDAO {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select B.id from BaseOfSupply B where B.nameOfObject = :baseName");
         query.setParameter("baseName", baseName);
-        return (int) query.getSingleResult();  }
+        return (int) query.getSingleResult();
+    }
 
     @Override
     public String getBaseNameById(int baseId) {
         Session session = sessionFactory.getCurrentSession();
-Query query = session.createQuery("select B.nameOfObject from BaseOfSupply B where B.id = :baseId");
-query.setParameter("baseId", baseId);
+        Query query = session.createQuery("select B.nameOfObject from BaseOfSupply B where B.id = :baseId");
+        query.setParameter("baseId", baseId);
         return (String) query.getSingleResult();
     }
 }

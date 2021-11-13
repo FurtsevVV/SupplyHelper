@@ -33,7 +33,7 @@ public class ProducerService implements ProducerServiceInterface {
     @Override
     @Transactional
     public Producer getProducer(int id) {
-       return producerDAO.getProducer(id);
+        return producerDAO.getProducer(id);
     }
 
     @Override

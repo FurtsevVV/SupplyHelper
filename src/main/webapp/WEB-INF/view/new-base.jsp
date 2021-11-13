@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <body>
+<body bgcolor="#CCCCCC">
 <h2>Add new base of supply</h2>
 <br>
 
